@@ -192,7 +192,7 @@ async function addP(ev){ev.preventDefault();if(busy)return;const form=ev.current
 function draw(){const adm=/^\/admin\/?$/.test(location.pathname),r=adm?"admin":(location.hash.slice(1)||"home");
 document.body.classList.toggle("adm",adm);$("#rb").content=adm?"noindex,nofollow":"index,follow";document.title=adm?"Admin — "+S.brand:S.brand;
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r==r));
-$("#app").innerHTML=adm?adminDashboard():({home,shop,about,contact}[r]||home)();chrome()}
+$("#app").innerHTML=({home,shop,about,contact,admin:adminDashboard}[r]||home)();chrome()}
 $("#cartb").onclick=cart;addEventListener("hashchange",()=>{closeOv();draw();scrollTo(0,0)});
 draw();Promise.allSettled([restoreAdminSession(),loadSettings()]).finally(loadProducts);
 </script></body></html>
