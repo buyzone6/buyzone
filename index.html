@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BuyZone</title>
+<meta name="robots" content="index,follow" id="rb">
+<meta name="description" content="Men’s watches and everyday accessories. Built for everyday.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--fg:#141414;--card:#fffdf8;--mut:#6b665c;--line:#ddd5c4;--ac:#141414;--acfg:#f6f1e7;--warn:#a5651a;--bad:#a33;--gold:#b7791f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0f0f;--fg:#f1ece0;--card:#1a1a1a;--mut:#9a9488;--line:#2c2c2c;--ac:#f1ece0;--acfg:#0f0f0f;--warn:#e0a24d;--bad:#e07a7a;--gold:#f59e0b}}
+:root[data-theme="dark"]{--bg:#0f0f0f;--fg:#f1ece0;--card:#1a1a1a;--mut:#9a9488;--line:#2c2c2c;--ac:#f1ece0;--acfg:#0f0f0f;--warn:#e0a24d;--bad:#e07a7a;--gold:#f59e0b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Inter,system-ui,sans-serif}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.01em;margin:0}
+a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
+.brand-tagline{font:700 clamp(26px,5vw,38px)/1.3 Inter,sans-serif;margin:18px 0 0}
+.brand-tagline span{display:block;color:var(--mut)}
+.brand-tagline em{display:block;font-family:"Playfair Display",Georgia,serif;font-style:italic;color:var(--gold)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font:600 22px "Cormorant Garamond",serif;letter-spacing:.12em;text-decoration:none}
+nav{display:flex;gap:18px;margin-left:auto;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+nav a{text-decoration:none;color:var(--mut)}nav a.on,nav a:hover{color:var(--fg)}
+.btn{background:var(--ac);color:var(--acfg);border:1px solid var(--ac);padding:11px 20px;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;font-size:12px;transition:.2s}
+.btn:hover{opacity:.85}.btn.o{background:transparent;color:var(--fg);border-color:var(--line)}.btn.s{padding:6px 10px}.btn:disabled{opacity:.35;cursor:not-allowed}
+.ic{background:none;border:0;cursor:pointer;padding:6px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(40px,8vw,84px);line-height:1;margin:10px 0 16px}
+.eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut)}
+.sec{padding:44px 0}.sec h2{font-size:32px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);cursor:pointer;transition:.25s;animation:in .4s both}
+.card:hover{transform:translateY(-3px);border-color:var(--fg)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.ph{aspect-ratio:1;display:flex;align-items:flex-end;padding:10px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#f1ece0}
+.ci{padding:12px 14px}.ci b{font-weight:500;display:block}.mut{color:var(--mut)}.sm{font-size:12px}
+.tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--line)}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.cat{border:1px solid var(--line);padding:26px 14px;text-align:center;background:var(--card);cursor:pointer;font-family:"Cormorant Garamond",serif;font-size:20px}
+.cat:hover{border-color:var(--fg)}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:center}
+input,select,textarea{background:var(--card);border:1px solid var(--line);padding:10px 12px;width:100%}
+.tools input,.tools select{width:auto;flex:1 1 150px}
+.chip{border:1px solid var(--line);background:none;padding:7px 14px;cursor:pointer;font-size:12px}.chip.on{background:var(--ac);color:var(--acfg)}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:flex;justify-content:flex-end}
+.ov.mid{justify-content:center;align-items:center;padding:14px}
+.panel{background:var(--bg);width:min(440px,100%);height:100%;overflow:auto;padding:22px;animation:sl .25s}
+.ov.mid .panel{height:auto;max-height:92vh;width:min(760px,100%)}
+@keyframes sl{from{transform:translateX(30px);opacity:0}}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:640px){.two{grid-template-columns:1fr}nav{gap:10px;font-size:11px}}
+.f{display:grid;gap:10px}.f label{font-size:12px;color:var(--mut)}.err{color:var(--bad);font-size:12px}
+.q{display:inline-flex;border:1px solid var(--line)}.q button{width:32px;background:none;border:0;cursor:pointer}.q span{min-width:30px;text-align:center;padding:5px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);padding:14px}.stat b{font:600 28px "Cormorant Garamond",serif;display:block}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.banner{background:var(--fg);color:var(--bg);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:30px 0;color:var(--mut);font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;z-index:60;font-size:13px}
+.empty{padding:50px;text-align:center;color:var(--mut)}
+body.adm .hs,body.adm nav,body.adm .strip,body.adm #cartb,body.adm .banner{display:none}
+.hs{flex:1;max-width:520px}.hs input{padding:9px 12px}
+.strip{display:flex;gap:20px;overflow-x:auto;padding:8px 18px;font-size:13px;border-top:1px solid var(--line)}.strip a{white-space:nowrap;cursor:pointer;color:var(--mut)}.strip a:hover{color:var(--fg)}
+@media(max-width:640px){.bar{flex-wrap:wrap;height:auto;padding:8px 0}.hs{order:5;flex:1 1 100%;max-width:none}}
+</style></head><body>
+<div class="banner" id="ban"></div>
+<header><div class="wrap bar"><a class="logo" href="/" id="brand"></a>
+<form class="hs" onsubmit="event.preventDefault();F.q=this.q.value;location.hash='shop';draw()"><input name="q" placeholder="Search watches, wallets, bracelets and more"></form><nav><a href="#shop" data-r="shop">Shop</a><a href="#about" data-r="about">About</a><a href="#contact" data-r="contact">Contact</a></nav>
+<button class="ic" id="cartb"></button></div><div class="wrap strip" id="strip"></div></header>
+<main class="wrap" id="app"></main>
+<footer><div class="wrap"><b class="serif" style="font-size:20px" id="fb"></b><p>Shipping · Returns &amp; Refunds · Privacy · Terms — policy pages coming soon.</p></div></footer>
+<div id="ovl"></div><div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SUPABASE_URL="https://ejtbplqhxhcnkccspvfn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_2UiibK1zbjaTh-zqmCZzYQ_VCD-9XX2";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const S={brand:"BuyZone",tag:"BUILT FOR EVERYDAY.",wa:"",email:"you@example.com",ship:60,free:999};
+const H={Watches:25,Wallets:30,Bracelets:210,Sunglasses:200};
+let P=[],O=[],C={},F={cat:"All",q:"",sort:"new",max:2000},at="dash",adminSession=null,adminRole=null,busy=false;
+try{C=JSON.parse(localStorage.getItem("n01cart")||"{}")}catch(e){}
+const $=s=>document.querySelector(s),R=n=>"₹"+Number(n).toLocaleString("en-IN");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const save=()=>{try{localStorage.setItem("n01cart",JSON.stringify(C))}catch(e){}};
+function toast(m){$("#toast").innerHTML=`<div class="toast">${esc(m)}</div>`;setTimeout(()=>$("#toast").innerHTML="",2600)}
+async function loadProducts(){
+  let q=supabaseClient.from("products").select("id,name,description,category,price,stock,is_featured,is_active,sku,images,created_at").order("created_at",{ascending:false});
+  if(!adminSession)q=q.eq("is_active",true);
+  const{data,error}=await q;
+  if(error){console.error("Product loading error:",error);toast("Could not load products");draw();return}
+  P=(data||[]).map(p=>({id:String(p.id),name:p.name,desc:p.description||"",cat:p.category,price:Number(p.price),stock:Number(p.stock)||0,feat:!!p.is_featured,active:!!p.is_active,sku:p.sku||"",imgs:Array.isArray(p.images)?p.images:[]}));
+  for(const i of Object.keys(C)){const p=P.find(x=>x.id==i);if(!p||!p.active||p.stock<1)delete C[i];else if(C[i]>p.stock)C[i]=p.stock}
+  save();draw();
+}
+async function loadSettings(){const{data}=await supabaseClient.from("store_settings").select("key,value");(data||[]).forEach(r=>{if(r.key==="shipping_fee")S.ship=Number(r.value)||0;if(r.key==="free_shipping_threshold")S.free=Number(r.value)||0;if(r.key==="whatsapp_number")S.wa=(r.value||"").replace(/\D/g,"")})}
+const hue=c=>H[c]??30;
+const bgd=p=>p.imgs.length?`background:url('${esc(p.imgs[0])}') center/cover`:`background:linear-gradient(145deg,hsl(${hue(p.cat)} 12% 22%),hsl(${hue(p.cat)} 10% 8%))`;
+const pc=p=>`<div class="card" onclick="pd('${p.id}')"><div class="ph" style="${bgd(p)}">${p.imgs.length?"":esc(p.cat||"")}</div><div class="ci"><b>${esc(p.name)}</b><span class="mut">${R(p.price)}</span> ${p.stock==0?'<span class="tag">Sold out</span>':p.stock<=3?'<span class="tag">Only '+p.stock+' left</span>':""}</div></div>`;
+function cartCount(){return Object.values(C).reduce((a,b)=>a+b,0)}
+function chrome(){$("#strip").innerHTML=["All",...Object.keys(H)].map(c=>`<a onclick="F.cat='${c}';location.hash='shop';draw()">${c}</a>`).join("");$("#brand").textContent=S.brand;$("#fb").textContent=S.brand;$("#ban").textContent=`Free shipping above ${R(S.free)} · Cash on Delivery available`;$("#cartb").textContent=`Cart (${cartCount()})`}
+function home(){const f=P.filter(p=>p.active&&p.feat),n=P.filter(p=>p.active).slice(0,4);
+return`<section class="hero"><div class="eyebrow">Men’s watches &amp; accessories · India</div><h1>${S.tag}</h1><p class="mut" style="max-width:480px">From everyday essentials to must-have accessories, discover quality products at prices you’ll love. Smart finds, fresh styles and everything you need — all in one place.</p>
+<h2 class="brand-tagline">Your favourites.<span>Your style.</span><em>Your BuyZone.</em></h2><br><a href="#shop"><button class="btn">Shop the collection</button></a></section>
+<section class="sec"><h2>Collections</h2><div class="cats">${Object.keys(H).map(c=>`<div class="cat" onclick="F.cat='${c}';location.hash='shop'">${c}</div>`).join("")}</div></section>
+<section class="sec"><h2>Best sellers</h2><div class="grid">${f.map(pc).join("")||'<div class="empty">No featured products yet.</div>'}</div></section>
+<section class="sec"><h2>New arrivals</h2><div class="grid">${n.map(pc).join("")||'<div class="empty">No products yet.</div>'}</div></section>
+<section class="sec" style="background:var(--fg);color:var(--bg);padding:36px 22px"><h2>Join the list</h2><p>First access to new drops.</p><form onsubmit="event.preventDefault();toast('Newsletter sign-up is not connected yet');this.reset()" style="display:flex;gap:8px;max-width:420px"><input type="email" required placeholder="Email address" style="color:#111"><button class="btn o" style="color:var(--bg);border-color:var(--bg)">Join</button></form></section>`}
+function shop(){const cs=["All",...Object.keys(H)];
+let L=P.filter(p=>p.active&&(F.cat=="All"||p.cat==F.cat)&&p.price<=F.max&&p.name.toLowerCase().includes(F.q.toLowerCase()));
+if(F.sort=="lo")L.sort((a,b)=>a.price-b.price);else if(F.sort=="hi")L.sort((a,b)=>b.price-a.price);
+return`<section class="sec"><h2>Shop</h2><div class="tools">${cs.map(c=>`<button class="chip ${F.cat==c?"on":""}" onclick="F.cat='${c}';draw()">${c}</button>`).join("")}</div>
+<div class="tools"><input id="sq" placeholder="Search products" value="${esc(F.q)}" oninput="F.q=this.value;gridOnly()"><select onchange="F.sort=this.value;draw()"><option value="new" ${F.sort=="new"?"selected":""}>Newest</option><option value="lo" ${F.sort=="lo"?"selected":""}>Price: low to high</option><option value="hi" ${F.sort=="hi"?"selected":""}>Price: high to low</option></select><label class="sm mut" style="flex:1 1 180px">Up to ${R(F.max)}<input type="range" min="300" max="2000" step="50" value="${F.max}" style="padding:0" oninput="F.max=+this.value;draw()"></label></div>
+<div class="grid" id="g">${L.map(pc).join("")||'<div class="empty">No products match your filters.</div>'}</div></section>`}
+function gridOnly(){const v=$("#sq").selectionStart;draw();const s=$("#sq");s.focus();s.setSelectionRange(v,v)}
+function pd(id){const p=P.find(x=>x.id==id);if(!p)return;
+const rel=P.filter(x=>x.active&&x.cat==p.cat&&x.id!=id).slice(0,3);
+ov(`<div class="two"><div><div class="ph" id="mi" style="aspect-ratio:1;${bgd(p)}">${p.imgs.length?"":"No image"}</div>${p.imgs.length>1?`<div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">${p.imgs.map((s,k)=>`<div onclick="gi('${p.id}',${k})" style="width:54px;height:54px;background:url('${esc(s)}') center/cover;cursor:pointer;border:1px solid var(--line)"></div>`).join("")}</div>`:""}</div><div class="f"><span class="eyebrow">${esc(p.cat||"")} · SKU ${esc(p.sku)}</span><h2>${esc(p.name)}</h2><div style="font-size:22px">${R(p.price)}</div>${p.desc?`<p class="mut">${esc(p.desc)}</p>`:""}<div class="sm">${p.stock>0?(p.stock<=3?"Only "+p.stock+" left":"In stock"):"Currently unavailable"}</div>
+<div class="q"><button onclick="qn(-1)">−</button><span id="qv">1</span><button onclick="qn(1)">+</button></div>
+<button class="btn" ${p.stock?"":"disabled"} onclick="add('${id}',+$('#qv').textContent);closeOv()">Add to cart</button><button class="btn o" ${p.stock?"":"disabled"} onclick="add('${id}',+$('#qv').textContent);closeOv();cart()">Buy now</button></div></div>
+${rel.length?`<h3 style="margin:22px 0 10px">Related</h3><div class="grid">${rel.map(pc).join("")}</div>`:""}`,1);
+window.qn=d=>{const e=$("#qv");e.textContent=Math.max(1,Math.min(p.stock||1,+e.textContent+d))}}
+function gi(i,k){const p=P.find(x=>x.id==i);if(p)$("#mi").style.background=`url('${p.imgs[k]}') center/cover`}
+function add(id,q){const p=P.find(x=>x.id==id);if(!p)return;const have=(C[id]||0)+q;if(have>p.stock){toast("Only "+p.stock+" available");return}C[id]=have;save();chrome();toast("Added to cart")}
+function ov(h,mid){$("#ovl").innerHTML=`<div class="ov ${mid?"mid":""}" onclick="if(event.target==this)closeOv()"><div class="panel"><button class="ic" style="float:right" onclick="closeOv()">Close ✕</button>${h}</div></div>`}
+function closeOv(){$("#ovl").innerHTML=""}
+const tot=()=>{const sub=Object.entries(C).reduce((a,[i,q])=>{const p=P.find(x=>x.id==i);return a+(p?p.price*q:0)},0);const sh=sub==0||sub>=S.free?0:S.ship;return{sub,sh,t:sub+sh}};
+function cart(){const e=Object.entries(C).filter(([i])=>P.find(x=>x.id==i)),t=tot();
+ov(`<h2>Your cart</h2>${e.length?e.map(([i,q])=>{const p=P.find(x=>x.id==i);return`<div class="row"><div><b>${esc(p.name)}</b><div class="mut sm">${R(p.price)} each</div></div><div><span class="q"><button onclick="cq('${i}',-1)">−</button><span>${q}</span><button onclick="cq('${i}',1)">+</button></span> <button class="ic" onclick="delete C['${i}'];save();chrome();cart()">Remove</button></div></div>`}).join("")+`<div class="row"><span>Subtotal</span><b>${R(t.sub)}</b></div><div class="row"><span>Shipping</span><b>${t.sh?R(t.sh):"Free"}</b></div><div class="row"><span>Total</span><b>${R(t.t)}</b></div><br><button class="btn" style="width:100%" onclick="checkout()">Checkout</button>`:'<div class="empty">Your cart is empty.</div>'}`)}
+function cq(i,d){const p=P.find(x=>x.id==i),n=(C[i]||0)+d;if(!p)return;if(n<1)delete C[i];else if(n>p.stock){toast("Only "+p.stock+" available");return}else C[i]=n;save();chrome();cart()}
+function checkout(){const t=tot();
+ov(`<h2>Checkout</h2><form class="f" id="cf" onsubmit="place(event)" novalidate><label>Full name<input name="n"></label><label>Phone (10 digits)<input name="p" inputmode="numeric"></label><label>Email (optional)<input name="e" type="email"></label><label>Address<textarea name="a" rows="2"></textarea></label><div class="two" style="gap:10px"><label>City<input name="c"></label><label>State<input name="s"></label></div><label>PIN code<input name="z" inputmode="numeric"></label><label>Payment<select name="m"><option value="cod">Cash on Delivery</option><option value="upi_manual">UPI (manual confirmation)</option></select></label><div class="err" id="er"></div><div class="row"><span>Order total</span><b>${R(t.t)}</b></div><button class="btn">Place order</button></form>`)}
+async function place(ev){ev.preventDefault();if(busy)return;const d=Object.fromEntries(new FormData(ev.target)),er=[];
+if(d.n.trim().length<2)er.push("Enter your full name.");if(!/^[6-9]\d{9}$/.test(d.p))er.push("Enter a valid 10-digit Indian mobile number.");
+if(d.e&&!/^\S+@\S+\.\S+$/.test(d.e))er.push("Email looks invalid.");if(d.a.trim().length<8)er.push("Enter your full address.");
+if(!d.c.trim()||!d.s.trim())er.push("City and state are required.");if(!/^[1-9]\d{5}$/.test(d.z))er.push("Enter a valid 6-digit PIN code.");
+const items=Object.entries(C).map(([i,q])=>({product_id:Number(i),qty:q}));if(!items.length)er.push("Your cart is empty.");
+if(er.length){$("#er").innerHTML=er.map(esc).join("<br>");return}
+busy=true;const btn=ev.target.querySelector("button");btn.disabled=true;
+const{data,error}=await supabaseClient.rpc("place_order",{p_name:d.n.trim(),p_phone:d.p,p_email:d.e||null,p_address:d.a.trim(),p_city:d.c.trim(),p_state:d.s.trim(),p_pin:d.z,p_payment:d.m,p_items:items});
+busy=false;
+if(error||!data||!data[0]){const e=$("#er");if(e)e.textContent=error?error.message:"Could not place the order. Please try again.";btn.disabled=false;loadProducts();return}
+const o=data[0];C={};save();chrome();loadProducts();
+const msg=encodeURIComponent(`Hi, I placed order ${o.o_number} (${R(o.o_total)}).`);
+ov(`<h2>Order placed ✓</h2><p>Your order number is <b>${esc(o.o_number)}</b>. Total ${R(o.o_total)} · ${d.m==="cod"?"Pay on delivery":"We’ll confirm your UPI payment with you"}. Keep this number and your phone number to ask about your order.</p>${S.wa?`<a href="https://wa.me/${S.wa}?text=${msg}" target="_blank" rel="noopener"><button class="btn">Message us on WhatsApp</button></a>`:""}`)}
+function about(){return`<section class="sec"><h2>About ${esc(S.brand)}</h2><p style="max-width:560px">Replace this with your real brand story, mission, vision and quality promise.</p></section>`}
+function contact(){return`<section class="sec"><h2>Contact</h2><div class="f" style="max-width:420px">${S.wa?`<a href="https://wa.me/${S.wa}" target="_blank" rel="noopener"><button class="btn">WhatsApp us</button></a>`:""}<span class="mut">${esc(S.email)}</span></div></section>`}
+async function checkAdmin(uid){const{data,error}=await supabaseClient.from("admin_users").select("role").eq("user_id",uid).maybeSingle();return error||!data?null:data.role}
+async function adminLogin(ev){ev.preventDefault();const f=ev.currentTarget,email=f.email.value.trim(),password=f.password.value;
+  const{data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error){toast(error.message);return}
+  const role=await checkAdmin(data.user.id);
+  if(!role){await supabaseClient.auth.signOut();toast("Access denied: this account is not an admin.");return}
+  adminSession=data.session;adminRole=role;toast("Admin login successful");await loadProducts()}
+async function adminLogout(){await supabaseClient.auth.signOut();adminSession=null;adminRole=null;toast("Logged out");await loadProducts()}
+async function restoreAdminSession(){const{data}=await supabaseClient.auth.getSession();if(!data.session)return;const role=await checkAdmin(data.session.user.id);if(role){adminSession=data.session;adminRole=role}else await supabaseClient.auth.signOut()}
+async function updateProduct(id,changes){const{error}=await supabaseClient.from("products").update(changes).eq("id",id);if(error)toast("Update failed: "+error.message);else toast("Product updated");await loadProducts()}
+async function deleteProduct(id){if(!confirm("Delete this product?"))return;const{error}=await supabaseClient.from("products").delete().eq("id",id);if(error){toast(error.code==="23503"?"This product has orders. Untick Active instead of deleting.":"Delete failed: "+error.message);return}delete C[id];save();await loadProducts();toast("Product deleted")}
+function adminDashboard(){
+  if(!adminSession)return`<section class="sec" style="max-width:440px;margin:auto"><h2>Admin Login</h2><p class="sm mut">Sign in with the account registered in Supabase.</p><form class="f" onsubmit="adminLogin(event)"><label>Email<input type="email" name="email" autocomplete="username" required></label><label>Password<div style="display:flex;gap:8px;align-items:center"><input id="adminPassword" type="password" name="password" autocomplete="current-password" required><button type="button" class="btn o s" onclick="const p=$('#adminPassword');p.type=p.type==='password'?'text':'password';this.textContent=p.type==='password'?'Show':'Hide'">Show</button></div></label><button class="btn" type="submit">Login</button></form></section>`;
+  const low=P.filter(p=>p.stock<=3),tabs=["dash","products","orders","settings"].map(t=>`<button class="chip ${at===t?"on":""}" onclick="at='${t}';draw();if(at==='orders'||at==='dash')loadOrders()">${{dash:"Dashboard",products:"Products & stock",orders:"Orders",settings:"Settings"}[t]}</button>`).join(" ");
+  let c="";
+  if(at==="dash")c=`<div class="stats"><div class="stat"><b>${P.length}</b>Products</div><div class="stat"><b>${P.reduce((a,p)=>a+p.stock,0)}</b>Units in stock</div><div class="stat"><b>${low.length}</b>Low-stock products</div><div class="stat"><b>${O.length}</b>Orders</div><div class="stat"><b>${O.filter(o=>o.order_status==="pending").length}</b>Pending orders</div><div class="stat"><b>${R(O.filter(o=>o.order_status==="delivered").reduce((a,o)=>a+Number(o.total),0))}</b>Revenue (delivered)</div><div class="stat"><b>${R(O.filter(o=>!["delivered","cancelled","returned"].includes(o.order_status)).reduce((a,o)=>a+Number(o.total),0))}</b>Open orders value</div></div><h3>Low stock</h3>${low.map(p=>`<div class="row"><span>${esc(p.name)}</span><span class="tag">${p.stock} left</span></div>`).join("")||'<div class="empty">All products are sufficiently stocked.</div>'}`;
+  if(at==="products")c=`<form class="tools" onsubmit="addP(event)"><input name="n" placeholder="Product name" required><select name="c">${Object.keys(H).map(x=>`<option value="${x}">${x}</option>`).join("")}</select><input name="p" type="number" min="1" placeholder="Price ₹" required><input name="k" type="number" min="0" placeholder="Cost ₹" required><input name="s" type="number" min="0" placeholder="Stock" required><input name="f" type="file" accept="image/jpeg,image/png,image/webp" multiple><button class="btn" type="submit" id="addb">Add product</button></form>
+<div class="tw"><table><tr><th>Name</th><th>SKU</th><th>Price</th><th>Stock</th><th>Featured</th><th>Active</th><th></th></tr>${P.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.sku)}</td><td>${R(p.price)}</td><td><input type="number" min="0" value="${p.stock}" style="width:75px" onchange="updateProduct('${p.id}',{stock:Math.max(0,Math.floor(Number(this.value)||0))})"></td><td><input type="checkbox" style="width:auto" ${p.feat?"checked":""} onchange="updateProduct('${p.id}',{is_featured:this.checked})"></td><td><input type="checkbox" style="width:auto" ${p.active?"checked":""} onchange="updateProduct('${p.id}',{is_active:this.checked})"></td><td><button class="btn s o" onclick="deleteProduct('${p.id}')">Delete</button></td></tr>`).join("")}</table></div><p class="sm mut">Images go to the Supabase product-images bucket. JPG, PNG or WebP; max 2 MB each, up to 6 per product.</p>`;
+  if(at==="orders")c=O.length?`<div class="tw"><table><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Pay</th><th>Paid?</th><th>Status</th><th>Tracking</th></tr>${O.map(o=>`<tr><td>${esc(o.order_number)}<br><span class="mut sm">${new Date(o.created_at).toLocaleDateString("en-IN")}</span></td><td>${esc(o.customer_name)}<br><span class="mut sm">${esc(o.phone)}</span> <a class="sm" href="https://wa.me/91${esc(o.phone)}" target="_blank" rel="noopener">WhatsApp</a><span class="mut sm" style="white-space:normal;display:block;max-width:220px">${esc(o.address+", "+o.city+", "+o.state+" "+o.pincode)}</span></td><td>${(o.order_items||[]).map(x=>esc(x.product_name)+" ×"+x.quantity).join("<br>")}</td><td>${R(o.total)}</td><td>${o.payment_method==="cod"?"COD":"UPI"}</td><td><select style="width:auto" onchange="setOrder(${o.id},{payment_status:this.value})">${["unpaid","paid","refunded"].map(x=>`<option ${o.payment_status===x?"selected":""}>${x}</option>`).join("")}</select></td><td><select style="width:auto" onchange="setStatus(${o.id},this.value)">${["pending","confirmed","processing","packed","shipped","delivered","cancelled","returned"].map(x=>`<option ${o.order_status===x?"selected":""}>${x}</option>`).join("")}</select></td><td><input style="width:130px" value="${esc(o.tracking_number||"")}" placeholder="Tracking no." onchange="setOrder(${o.id},{tracking_number:this.value.trim()||null})"></td></tr>`).join("")}</table></div>`:`<div class="empty">No orders yet.</div>`;
+  if(at==="settings")c=`<form class="f" style="max-width:420px" onsubmit="saveSettings(event)"><label>Shipping charge ₹<input name="sf" type="number" min="0" value="${S.ship}" required></label><label>Free shipping above ₹<input name="ft" type="number" min="0" value="${S.free}" required></label><label>WhatsApp number with country code (e.g. 919876543210)<input name="wa" inputmode="numeric" value="${esc(S.wa)}"></label><button class="btn">Save settings</button></form>`;
+  return`<section class="sec"><div class="row"><div><h2>Admin dashboard</h2><p class="sm mut">Signed in as ${esc(adminRole||"admin")}</p></div><button class="btn o s" onclick="adminLogout()">Logout</button></div><div class="tools">${tabs}</div>${c}</section>`}
+async function loadOrders(){const{data,error}=await supabaseClient.from("orders").select("*,order_items(product_name,quantity,unit_price)").order("created_at",{ascending:false}).limit(200);if(error){toast("Could not load orders: "+error.message);return}O=data||[];draw()}
+async function setOrder(id,ch){const{error}=await supabaseClient.from("orders").update(ch).eq("id",id);toast(error?"Update failed: "+error.message:"Order updated");await loadOrders()}
+async function setStatus(id,st){const{error}=await supabaseClient.rpc("admin_set_order_status",{p_order:id,p_status:st});toast(error?error.message:"Status: "+st);await loadOrders();if(!error)loadProducts()}
+async function saveSettings(ev){ev.preventDefault();const f=ev.currentTarget,wa=f.wa.value.replace(/\D/g,"");
+  if(wa&&(wa.length<11||wa.length>15)){toast("Enter the WhatsApp number with country code, e.g. 919876543210");return}
+  const rows=[["shipping_fee",f.sf.value],["free_shipping_threshold",f.ft.value],["whatsapp_number",wa]].map(([key,value])=>({key,value:String(value)}));
+  const{error}=await supabaseClient.from("store_settings").upsert(rows);if(error){toast("Save failed: "+error.message);return}
+  await loadSettings();toast("Settings saved");draw()}
+async function addP(ev){ev.preventDefault();if(busy)return;const form=ev.currentTarget,d=Object.fromEntries(new FormData(form)),files=[...form.f.files].slice(0,6);
+  if(files.some(f=>!/^image\/(jpeg|png|webp)$/.test(f.type)||f.size>2097152)){toast("Use JPG, PNG or WebP images under 2 MB each.");return}
+  busy=true;$("#addb").disabled=true;const urls=[],paths=[];
+  try{
+    for(const file of files){const path=`${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`;
+      const{error}=await supabaseClient.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});
+      if(error)throw new Error("Image upload failed: "+error.message);
+      paths.push(path);urls.push(supabaseClient.storage.from("product-images").getPublicUrl(path).data.publicUrl)}
+    const{error}=await supabaseClient.from("products").insert({name:d.n.trim(),description:"",category:d.c,product_type:"physical",sku:"BZ-"+Date.now().toString().slice(-8),price:Number(d.p),cost_price:Number(d.k),stock:Number(d.s),images:urls,is_featured:false,is_active:true});
+    if(error)throw new Error("Product save failed: "+error.message);
+    form.reset();toast("Product saved");await loadProducts();
+  }catch(e){if(paths.length)await supabaseClient.storage.from("product-images").remove(paths);toast(e.message)}
+  finally{busy=false;const b=$("#addb");if(b)b.disabled=false}}
+function draw(){const adm=/^\/admin\/?$/.test(location.pathname),r=adm?"admin":(location.hash.slice(1)||"home");
+document.body.classList.toggle("adm",adm);$("#rb").content=adm?"noindex,nofollow":"index,follow";document.title=adm?"Admin — "+S.brand:S.brand;
+document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r==r));
+$("#app").innerHTML=adm?adminDashboard():({home,shop,about,contact}[r]||home)();chrome()}
+$("#cartb").onclick=cart;addEventListener("hashchange",()=>{closeOv();draw();scrollTo(0,0)});
+draw();Promise.allSettled([restoreAdminSession(),loadSettings()]).finally(loadProducts);
+</script></body></html>
