@@ -71,7 +71,7 @@ body.adm .hs,body.adm nav,body.adm .strip,body.adm #cartb,body.adm .banner{displ
 <form class="hs" onsubmit="event.preventDefault();F.q=this.q.value;location.hash='shop';draw()"><input name="q" placeholder="Search watches, wallets, bracelets and more"></form><nav><a href="#shop" data-r="shop">Shop</a><a href="#about" data-r="about">About</a><a href="#contact" data-r="contact">Contact</a><a href="#track" data-r="track">Track order</a></nav>
 <button class="ic" id="cartb"></button></div><div class="wrap strip" id="strip"></div></header>
 <main class="wrap" id="app"></main>
-<footer><div class="wrap"><b class="serif" style="font-size:20px" id="fb"></b><p><a href="#policies">Shipping, cancellation &amp; returns</a></p></div></footer>
+<footer><div class="wrap"><b class="serif" style="font-size:20px" id="fb"></b><p><a href="#shipping">Shipping information</a> · <a href="mailto:buyzonestore6@gmail.com">buyzonestore6@gmail.com</a></p><p class="sm">© <span id="year"></span> BuyZone. All rights reserved.</p></div></footer>
 <div id="ovl"></div><div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
@@ -79,7 +79,7 @@ body.adm .hs,body.adm nav,body.adm .strip,body.adm #cartb,body.adm .banner{displ
 const SUPABASE_URL="https://ejtbplqhxhcnkccspvfn.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_2UiibK1zbjaTh-zqmCZzYQ_VCD-9XX2";
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-const S={brand:"BuyZone",tag:"BUILT FOR EVERYDAY.",wa:"",email:"you@example.com",ship:60,free:999};
+const S={brand:"BuyZone",tag:"BUILT FOR EVERYDAY.",wa:"",email:"buyzonestore6@gmail.com",ship:60,free:999};
 const H={Watches:25,Wallets:30,Bracelets:210,Sunglasses:200};
 const PM={cod:"Cash on Delivery",upi_manual:"UPI (manual)",cashfree:"Online (Cashfree)"},STS=["pending","confirmed","processing","packed","shipped","delivered","cancelled","returned"];
 // EDIT THESE: store policy text shown on the Policies page. Review before launch.
@@ -105,7 +105,7 @@ const hue=c=>H[c]??30;
 const bgd=p=>p.imgs.length?`background:url('${esc(p.imgs[0])}') center/cover`:`background:linear-gradient(145deg,hsl(${hue(p.cat)} 12% 22%),hsl(${hue(p.cat)} 10% 8%))`;
 const pc=p=>`<div class="card" onclick="pd('${p.id}')"><div class="ph" style="${bgd(p)}">${p.imgs.length?"":esc(p.cat||"")}</div><div class="ci"><b>${esc(p.name)}</b><span class="mut">${R(p.price)}</span> ${p.stock==0?'<span class="tag">Sold out</span>':p.stock<=3?'<span class="tag">Only '+p.stock+' left</span>':""}</div></div>`;
 function cartCount(){return Object.values(C).reduce((a,b)=>a+b,0)}
-function chrome(){$("#strip").innerHTML=["All",...Object.keys(H)].map(c=>`<a onclick="F.cat='${c}';location.hash='shop';draw()">${c}</a>`).join("");$("#brand").textContent=S.brand;$("#fb").textContent=S.brand;$("#ban").textContent=`Free shipping above ${R(S.free)} · Cash on Delivery available`;$("#cartb").textContent=`Cart (${cartCount()})`}
+function chrome(){const year=$("#year");if(year)year.textContent=new Date().getFullYear();$("#strip").innerHTML=["All",...Object.keys(H)].map(c=>`<a onclick="F.cat='${c}';location.hash='shop';draw()">${c}</a>`).join("");$("#brand").textContent=S.brand;$("#fb").textContent=S.brand;$("#ban").textContent=`Free shipping above ${R(S.free)} · Cash on Delivery available`;$("#cartb").textContent=`Cart (${cartCount()})`}
 function home(){const f=P.filter(p=>p.active&&p.feat),n=P.filter(p=>p.active).slice(0,4);
 return`<section class="hero"><div class="eyebrow">Men’s watches &amp; accessories · India</div><h1>${S.tag}</h1><p class="mut" style="max-width:480px">From everyday essentials to must-have accessories, discover quality products at prices you’ll love. Smart finds, fresh styles and everything you need — all in one place.</p>
 <h2 class="brand-tagline">Your favourites.<span>Your style.</span><em>Your BuyZone.</em></h2><br><a href="#shop"><button class="btn">Shop the collection</button></a></section>
@@ -136,7 +136,7 @@ function cart(){const e=Object.entries(C).filter(([i])=>P.find(x=>x.id==i)),t=to
 ov(`<h2>Your cart</h2>${e.length?e.map(([i,q])=>{const p=P.find(x=>x.id==i);return`<div class="row"><div><b>${esc(p.name)}</b><div class="mut sm">${R(p.price)} each</div></div><div><span class="q"><button onclick="cq('${i}',-1)">−</button><span>${q}</span><button onclick="cq('${i}',1)">+</button></span> <button class="ic" onclick="delete C['${i}'];save();chrome();cart()">Remove</button></div></div>`}).join("")+`<div class="row"><span>Subtotal</span><b>${R(t.sub)}</b></div><div class="row"><span>Shipping</span><b>${t.sh?R(t.sh):"Free"}</b></div><div class="row"><span>Total</span><b>${R(t.t)}</b></div><br><button class="btn" style="width:100%" onclick="checkout()">Checkout</button>`:'<div class="empty">Your cart is empty.</div>'}`)}
 function cq(i,d){const p=P.find(x=>x.id==i),n=(C[i]||0)+d;if(!p)return;if(n<1)delete C[i];else if(n>p.stock){toast("Only "+p.stock+" available");return}else C[i]=n;save();chrome();cart()}
 function checkout(){const t=tot();
-ov(`<h2>Checkout</h2><form class="f" id="cf" onsubmit="place(event)" novalidate><label>Full name<input name="n"></label><label>Phone (10 digits)<input name="p" inputmode="numeric"></label><label>Email (optional)<input name="e" type="email"></label><label>Address<textarea name="a" rows="2"></textarea></label><div class="two" style="gap:10px"><label>City<input name="c"></label><label>State<input name="s"></label></div><label>PIN code<input name="z" inputmode="numeric"></label><label>Payment<select name="m"><option value="cod">Cash on Delivery</option><option value="upi_manual">UPI (manual confirmation)</option><option value="cashfree">Pay online: UPI, cards, net banking (Cashfree)</option></select></label><div class="err" id="er"></div><div class="row"><span>Order total</span><b>${R(t.t)}</b></div><p class="sm mut">Shipping: ${t.sh?R(t.sh):"free"}. <a href="#policies" onclick="closeOv()">Shipping, cancellation &amp; returns</a></p><button class="btn" id="pob">Place order</button></form>`)}
+ov(`<h2>Checkout</h2><form class="f" id="cf" onsubmit="place(event)" novalidate><label>Full name<input name="n"></label><label>Phone (10 digits)<input name="p" inputmode="numeric"></label><label>Email (optional)<input name="e" type="email"></label><label>Address<textarea name="a" rows="2"></textarea></label><div class="two" style="gap:10px"><label>City<input name="c"></label><label>State<input name="s"></label></div><label>PIN code<input name="z" inputmode="numeric"></label><label>Payment<select name="m"><option value="cod">Cash on Delivery</option><option value="upi_manual">UPI (manual confirmation)</option><option value="cashfree">Pay online: UPI, cards, net banking (Cashfree)</option></select></label><div class="err" id="er"></div><div class="row"><span>Order total</span><b>${R(t.t)}</b></div><p class="sm mut">Shipping: ${t.sh?R(t.sh):"free"}. <a href="#shipping" onclick="closeOv()">Shipping information</a></p><button class="btn" id="pob">Place order</button></form>`)}
 async function place(ev){ev.preventDefault();if(busy)return;const d=Object.fromEntries(new FormData(ev.target)),er=[];
 if(d.n.trim().length<2)er.push("Enter your full name.");if(!/^[6-9]\d{9}$/.test(d.p))er.push("Enter a valid 10-digit Indian mobile number.");
 if(d.e&&!/^\S+@\S+\.\S+$/.test(d.e))er.push("Email looks invalid.");if(d.a.trim().length<8)er.push("Enter your full address.");
@@ -181,13 +181,9 @@ function track(){const r=TR.res;return`<section class="sec"><h2>Track your order
 async function doTrack(ev){ev.preventDefault();if(TR.loading)return;const f=ev.currentTarget;TR.n=f.n.value.trim();TR.p=f.p.value.trim();TR.loading=true;draw();
 const{data,error}=await supabaseClient.rpc("track_order",{p_number:TR.n,p_phone:TR.p});TR.loading=false;TR.res=error?null:(data||null);if(error)toast("Could not check the order. Try again.");draw()}
 async function recheck(){TR.loading=true;draw();await verifyPay(TR.n,TR.p);TR.loading=false;const{data}=await supabaseClient.rpc("track_order",{p_number:TR.n,p_phone:TR.p});TR.res=data||null;draw()}
-function policies(){return`<section class="sec" style="max-width:680px"><h2>Shipping, cancellation &amp; returns</h2>
-<h3 style="margin:18px 0 6px">Shipping</h3><p>Shipping is ${R(S.ship)}, and free on orders of ${R(S.free)} or more. Delivery time depends on your location and the courier. We share a tracking number once your order ships.</p>
-<h3 style="margin:18px 0 6px">Cancellation</h3><p>You can cancel before your order is shipped. Contact us with your order number. Paid online orders that are cancelled are refunded to the original payment method; the time this takes depends on your bank.</p>
-<h3 style="margin:18px 0 6px">Returns</h3><p>Contact us within ${POLICY.returnDays} days of delivery with your order number and photos if the item is damaged or not as described. We will confirm the next steps and any refund.</p>
-<p class="sm mut">Questions? Use the Contact page${S.wa?" or WhatsApp":""}.</p></section>`}
-function about(){return`<section class="sec"><h2>About ${esc(S.brand)}</h2><p style="max-width:560px">Replace this with your real brand story, mission, vision and quality promise.</p></section>`}
-function contact(){return`<section class="sec"><h2>Contact</h2><div class="f" style="max-width:420px">${S.wa?`<a href="https://wa.me/${S.wa}" target="_blank" rel="noopener"><button class="btn">WhatsApp us</button></a>`:""}<span class="mut">${esc(S.email)}</span></div></section>`}
+function shipping(){return`<section class="sec" style="max-width:680px"><h2>Shipping information</h2><p>Shipping is ${R(S.ship)}. Orders of ${R(S.free)} or more qualify for free shipping. The final shipping charge is shown in your cart and at checkout.</p><p>Delivery time depends on your location and the courier. A tracking number will be shared once your order is shipped.</p><p class="sm mut">For order or delivery enquiries, email <a href="mailto:${esc(S.email)}">${esc(S.email)}</a>.</p></section>`}
+function about(){return`<section class="sec"><h2>About ${esc(S.brand)}</h2><p style="max-width:560px">BuyZone brings together watches and everyday accessories for men in one simple place. Explore practical styles for daily use, with clear pricing and convenient online shopping.</p></section>`}
+function contact(){return`<section class="sec"><h2>Contact</h2><div class="f" style="max-width:420px">${S.wa?`<a href="https://wa.me/${S.wa}" target="_blank" rel="noopener"><button class="btn">WhatsApp us</button></a>`:""}<a class="mut" href="mailto:${esc(S.email)}">${esc(S.email)}</a></div></section>`}
 async function checkAdmin(uid){const{data,error}=await supabaseClient.from("admin_users").select("role").eq("user_id",uid).maybeSingle();return error||!data?null:data.role}
 async function adminLogin(ev){ev.preventDefault();const f=ev.currentTarget,email=f.email.value.trim(),password=f.password.value;
   const{data,error}=await supabaseClient.auth.signInWithPassword({email,password});
@@ -235,7 +231,7 @@ async function addP(ev){ev.preventDefault();if(busy)return;const form=ev.current
 function draw(){const adm=/^\/admin\/?$/.test(location.pathname)||location.hash==="#admin",r=adm?"admin":(location.hash.slice(1)||"home");
 document.body.classList.toggle("adm",adm);$("#rb").content=adm?"noindex,nofollow":"index,follow";document.title=adm?"Admin — "+S.brand:S.brand;
 document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r==r));
-$("#app").innerHTML=adm?adminDashboard():({home,shop,about,contact,track,policies}[r]||home)();chrome()}
+$("#app").innerHTML=adm?adminDashboard():({home,shop,about,contact,track,shipping}[r]||home)();chrome()}
 $("#cartb").onclick=cart;addEventListener("hashchange",()=>{closeOv();draw();scrollTo(0,0)});
 (function(){const params=new URLSearchParams(location.search),q=params.get("cf_order")||params.get("order_id");if(!q)return;let p=null;try{p=JSON.parse(sessionStorage.getItem("cf_pending")||"null")}catch(e){}
 history.replaceState(null,"",location.pathname+location.hash);if(p&&p.n===q)setTimeout(()=>confirmPayment(q,p.p),400);else{TR.n=q;location.hash="track"}})();
