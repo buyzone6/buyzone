@@ -164,15 +164,42 @@ ov(`<h2>Complete your payment</h2><p>Order <b>${esc(j.order_number)}</b> · ${R(
 try{await cf.checkout({paymentSessionId:j.payment_session_id,redirectTarget:"_modal"})}
 catch(e){console.warn("Cashfree checkout closed or returned an error; checking payment status with the server.",e)}
 await confirmPayment(j.order_number,d.p)}
-async function verifyPay(n,phone){try{const r=await fetch(FN("verify-cashfree-payment"),{method:"POST",headers:FH,body:JSON.stringify({order_number:n,phone})});return await r.json()}catch(e){return{}}}
+async function verifyPay(n,phone){
+  try{
+    const r=await fetch(FN("verify-cashfree-payment"),{method:"POST",headers:FH,body:JSON.stringify({order_number:n,phone})});
+    const data=await r.json().catch(()=>({error:"Invalid verification response."}));
+    return {...data,_http_ok:r.ok,_http_status:r.status};
+  }catch(e){
+    console.warn("Payment verification request failed:",e);
+    return {_http_ok:false,_network_error:true};
+  }
+}
 async function confirmPayment(n,phone){
-ov(`<h2>Confirming payment…</h2><p class="mut">We are checking with the payment provider. This takes a few seconds.</p>`);
-const j=await verifyPay(n,phone);try{sessionStorage.removeItem("cf_pending")}catch(e){}
-const trk=`<a href="#track" onclick="TR.n='${esc(n)}';TR.p='${esc(phone)}';closeOv()"><button class="btn o">Track order</button></a>`,st=j.payment_status;
-if(st==="paid"){C={};save();chrome();loadProducts();ov(`<h2>Payment received ✓</h2><p>Order <b>${esc(n)}</b> is confirmed.</p><p class="sm mut">Transaction ID: ${esc(j.transaction_id||"—")}</p>${trk}`)}
-else if(st==="pending"){C={};save();chrome();loadProducts();ov(`<h2>Payment pending</h2><p>Your bank has not confirmed order <b>${esc(n)}</b> yet. We’ll update it automatically when it does. You can check the status on the Track order page.</p>${trk}`)}
-else if(st==="failed"){loadProducts();ov(`<h2>Payment not completed</h2><p>The payment failed or was cancelled. Your cart is saved, so you can try again. If money was deducted from your account, contact us with order number <b>${esc(n)}</b>.</p><button class="btn" onclick="closeOv()">Back</button>`)}
-else{ov(`<h2>We couldn’t confirm the payment yet</h2><p>If money was deducted, it will be matched automatically. Check order <b>${esc(n)}</b> on the Track order page with your phone number.</p>${trk}`)}}
+  ov(`<h2>Confirming payment…</h2><p class="mut">We are checking your payment securely with Cashfree. Please don't pay again.</p>`);
+  let j={},st="";
+  // Cashfree may take a few seconds to make the final payment status available.
+  for(let attempt=0;attempt<6;attempt++){
+    j=await verifyPay(n,phone);
+    st=j.payment_status||"";
+    if(st==="paid"||st==="pending"||st==="failed")break;
+    if(attempt<5)await new Promise(resolve=>setTimeout(resolve,2000));
+  }
+  try{sessionStorage.removeItem("cf_pending")}catch(e){}
+  const trk=`<a href="#track" onclick="TR.n='${esc(n)}';TR.p='${esc(phone)}';closeOv()"><button class="btn o">Track order</button></a>`;
+  if(st==="paid"){
+    C={};save();chrome();loadProducts();
+    ov(`<h2>Payment received ✓</h2><p>Order <b>${esc(n)}</b> is confirmed.</p><p class="sm mut">Transaction ID: ${esc(j.transaction_id||"—")}</p>${trk}`);
+  }else if(st==="pending"){
+    C={};save();chrome();loadProducts();
+    ov(`<h2>Order created ✓</h2><p>Payment for order <b>${esc(n)}</b> is still pending with the payment provider. Please don't pay again. Check the latest status using Track order.</p>${trk}`);
+  }else if(st==="failed"&&j._http_ok){
+    loadProducts();
+    ov(`<h2>Payment not completed</h2><p>Cashfree reports that payment for order <b>${esc(n)}</b> did not succeed. Your cart is saved. If money was debited, don't retry yet; contact us with this order number.</p>${trk}<button class="btn" onclick="closeOv()">Back</button>`);
+  }else{
+    C={};save();chrome();loadProducts();
+    ov(`<h2>Order created — confirmation pending</h2><p>Your order number is <b>${esc(n)}</b>. BUYZONE has not yet received a final payment confirmation from Cashfree. <b>Please don't pay again.</b> Check this order again using Track order, or contact us with the order number if money was deducted.</p>${trk}`);
+  }
+}
 function trackCard(r){const retry=r.payment_method==="cashfree"&&["unpaid","pending","failed"].includes(r.payment_status)&&r.order_status==="pending";
 return`<div class="stat" style="max-width:520px;margin-top:18px"><b>${esc(r.order_number)}</b><div class="row"><span>Order status</span><b>${esc(r.order_status)}</b></div><div class="row"><span>Payment</span><b>${esc(PM[r.payment_method]||r.payment_method)} · ${esc(r.payment_status)}</b></div>${r.transaction_id?`<div class="row"><span>Transaction ID</span><span>${esc(r.transaction_id)}</span></div>`:""}${r.tracking_number?`<div class="row"><span>Tracking number</span><b>${esc(r.tracking_number)}</b></div>`:""}${(r.items||[]).map(i=>`<div class="row"><span>${esc(i.name)} ×${i.qty}</span><span>${R(i.price*i.qty)}</span></div>`).join("")}<div class="row"><span>Shipping</span><span>${Number(r.shipping_fee)?R(r.shipping_fee):"Free"}</span></div><div class="row"><span>Total</span><b>${R(r.total)}</b></div>${retry?`<br><button class="btn s" onclick="recheck('${esc(r.order_number)}')">Check payment status</button>`:""}</div>`}
 function track(){const r=TR.res;return`<section class="sec"><h2>Track your order</h2><p class="mut">Enter your checkout mobile number to see your orders. Order number is optional.</p><form class="f" style="max-width:420px" onsubmit="doTrack(event)"><label>Mobile number (required)<input name="p" inputmode="numeric" maxlength="10" value="${esc(TR.p)}" placeholder="10-digit mobile number" required></label><label>Order number (optional)<input name="n" value="${esc(TR.n)}" placeholder="e.g. BZ-1001"></label><button class="btn" ${TR.loading?"disabled":""}>${TR.loading?"Checking…":"Track orders"}</button></form>${r===null?'<p class="err">No orders found for this mobile number and order number.</p>':Array.isArray(r)?(r.length?r.map(trackCard).join(""):(TR.p?'<p class="empty">No orders found for this mobile number.</p>':"")):r?trackCard(r):""}</section>`}
