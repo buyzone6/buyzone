@@ -13,7 +13,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--bg:#0f0f0f;--fg:#f1ece0;--card:#1a1a1a;--mut:#9a9488;--line:#2c2c2c;--ac:#f1ece0;--acfg:#0f0f0f;--warn:#e0a24d;--bad:#e07a7a;--gold:#f59e0b}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 Inter,system-ui,sans-serif}
-h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;letter-spacing:.01em;margin:0}
+h1,h2,h3,.serif{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:.01em;margin:0}
 a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
 .brand-tagline{font:700 clamp(26px,5vw,38px)/1.3 Inter,sans-serif;margin:18px 0 0}
 .brand-tagline span{display:block;color:var(--mut)}
@@ -21,7 +21,7 @@ a{color:inherit}button,input,select,textarea{font:inherit;color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;gap:16px;height:60px}
-.logo{font:600 22px "Cormorant Garamond",serif;letter-spacing:.12em;text-decoration:none}
+.logo{font:600 22px Inter,system-ui,sans-serif;letter-spacing:.12em;text-decoration:none}
 nav{display:flex;gap:18px;margin-left:auto;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
 nav a{text-decoration:none;color:var(--mut)}nav a.on,nav a:hover{color:var(--fg)}
 .btn{background:var(--ac);color:var(--acfg);border:1px solid var(--ac);padding:11px 20px;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;font-size:12px;transition:.2s}
@@ -39,7 +39,7 @@ nav a{text-decoration:none;color:var(--mut)}nav a.on,nav a:hover{color:var(--fg)
 .ci{padding:12px 14px}.ci b{font-weight:500;display:block}.mut{color:var(--mut)}.sm{font-size:12px}
 .tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border:1px solid var(--line)}
 .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.cat{border:1px solid var(--line);padding:26px 14px;text-align:center;background:var(--card);cursor:pointer;font-family:"Cormorant Garamond",serif;font-size:20px}
+.cat{border:1px solid var(--line);padding:26px 14px;text-align:center;background:var(--card);cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:20px}
 .cat:hover{border-color:var(--fg)}
 .tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:center}
 input,select,textarea{background:var(--card);border:1px solid var(--line);padding:10px 12px;width:100%}
@@ -55,7 +55,7 @@ input,select,textarea{background:var(--card);border:1px solid var(--line);paddin
 .f{display:grid;gap:10px}.f label{font-size:12px;color:var(--mut)}.err{color:var(--bad);font-size:12px}
 .q{display:inline-flex;border:1px solid var(--line)}.q button{width:32px;background:none;border:0;cursor:pointer}.q span{min-width:30px;text-align:center;padding:5px 0}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
-.stat{background:var(--card);border:1px solid var(--line);padding:14px}.stat b{font:600 28px "Cormorant Garamond",serif;display:block}
+.stat b{font:600 28px Inter,system-ui,sans-serif;display:block}
 .tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
 .banner{background:var(--fg);color:var(--bg);text-align:center;font-size:12px;padding:7px;letter-spacing:.06em}
 footer{border-top:1px solid var(--line);margin-top:30px;padding:30px 0;color:var(--mut);font-size:13px}
